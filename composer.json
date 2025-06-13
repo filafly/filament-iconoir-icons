@@ -1,0 +1,38 @@
+{
+  "name": "filafly/filament-iconoir-icons",
+  "description": "Iconoir icon pack for Filament Icons",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "Laravel",
+    "Filament",
+    "icons",
+    "Iconoir",
+    "replace",
+    "swap"
+  ],
+  "homepage": "https://filafly.com/plugins/filament-icons",
+  "authors": [
+    {
+      "role": "Developer",
+      "name": "Nolan Nordlund",
+      "email": "nolan@filafly.com",
+      "homepage": "https://www.filafly.com/"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "filafly/filament-icons": "^1.0",
+    "andreiio/blade-iconoir": "^4.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Filafly\\Icons\\Iconoir\\": "src/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require-dev": {
+    "laravel/pint": "^1.22"
+  }
+}
