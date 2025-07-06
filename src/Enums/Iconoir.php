@@ -5,7 +5,7 @@ namespace Filafly\Icons\Iconoir\Enums;
 use Filament\Support\Contracts\ScalableIcon;
 use Filament\Support\Enums\IconSize;
 
-enum IconoirIcon: string implements ScalableIcon
+enum Iconoir: string implements ScalableIcon
 {
     case AccessibilitySign = 'iconoir-accessibility-sign';
     case AccessibilityTech = 'iconoir-accessibility-tech';
