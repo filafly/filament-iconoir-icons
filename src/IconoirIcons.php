@@ -1256,11 +1256,4 @@ class IconoirIcons extends IconSet
         'iconoir-zoom-in' => IconoirStyle::Regular,
         'iconoir-zoom-out' => IconoirStyle::Regular,
     ];
-
-    public function solid(): static
-    {
-        $this->currentStyle = IconoirStyle::Solid;
-
-        return $this;
-    }
 }
