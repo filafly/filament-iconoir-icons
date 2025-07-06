@@ -2,18 +2,19 @@
 
 namespace Filafly\Icons\Iconoir;
 
+use Filafly\Icons\Iconoir\Enums\IconoirIcon;
+use Filafly\Icons\Iconoir\Enums\IconoirStyle;
 use Filafly\Icons\IconSet;
 
 class IconoirIcons extends IconSet
 {
-    protected string $pluginId = 'iconoir-for-filament';
+    protected string $pluginId = 'filafly-filament-iconoir-icons';
 
-    protected string $defaultStyle = 'regular';
+    protected mixed $iconEnum = IconoirIcon::class;
 
-    protected array $styleMap = [
-        'regular' => '',
-        'solid' => '-solid',
-    ];
+    protected mixed $styleEnum = IconoirStyle::class;
+
+    protected mixed $defaultStyle = IconoirStyle::Regular;
 
     protected array $iconMap = [
         'panels::global-search.field' => 'iconoir-search',
@@ -1258,7 +1259,7 @@ class IconoirIcons extends IconSet
 
     public function solid(): static
     {
-        $this->currentStyle = 'solid';
+        $this->currentStyle = IconoirStyle::Solid;
 
         return $this;
     }
