@@ -19,7 +19,7 @@ composer require filafly/filament-iconoir-icons
 After the package is installed, you must register the plugin in your Filament Panel provider:
 
 ```php
-use Filafly\Icons\IconoirIcons;
+use Filafly\Icons\Iconoir\IconoirIcons;
 
 public function panel(Panel $panel): Panel
 {
