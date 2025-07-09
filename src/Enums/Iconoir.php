@@ -1682,7 +1682,7 @@ enum Iconoir: string implements ScalableIcon
     public function getIconForSize(IconSize $size): string
     {
         return match ($size) {
-            default => "iconoir-$this->value",
+            default => $this->value,
         };
     }
 }
