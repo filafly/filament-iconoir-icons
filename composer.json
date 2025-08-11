@@ -21,9 +21,10 @@
     }
   ],
   "require": {
-    "php": "^8.0",
-    "filafly/filament-icons": "^1.0",
-    "andreiio/blade-iconoir": "^4.7"
+    "php": "^8.2",
+    "filafly/filament-icons": "^2.0",
+    "andreiio/blade-iconoir": "^4.7",
+    "filament/filament": "^4.0"
   },
   "autoload": {
     "psr-4": {

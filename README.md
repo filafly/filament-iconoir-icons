@@ -14,8 +14,6 @@ You can install the package via composer:
 composer require filafly/filament-iconoir-icons
 ```
 
-> **Note:** This package automatically installs the required `filafly/filament-icons` base package.
-
 After the package is installed, you must register the plugin in your Filament Panel provider:
 
 ```php
@@ -24,13 +22,11 @@ use Filafly\Icons\Iconoir\IconoirIcons;
 public function panel(Panel $panel): Panel
 {
     return $panel
-        ->plugins([
-            IconoirIcons::make(),
-        ]);
+        ->plugin(IconoirIcons::make());
 }
 ```
 
-## Icon Styles
+## Setting the global icon style
 
 Iconoir icons come in multiple styles that you can switch between. Available styles include:
 
@@ -44,35 +40,120 @@ IconoirIcons::make()->regular(); // (default)
 IconoirIcons::make()->solid();
 ```
 
-## Override Specific Icons
-If you need to override certain icons to use a different style, you can use either icon aliases or direct icon names.
+## Setting style for a subset of icons
 
-### Using Icon Aliases
-Use the `overrideStyleForAlias` method with a [Filament Icon Alias](https://filamentphp.com/docs/3.x/support/icons#available-icon-aliases). This method works with either a single icon key (string) or multiple icon keys (array).
+If you need to override certain icons to use a different style, you can use either icon aliases or icon enum cases.
+
+### Using icon aliases
+Use the `overrideStyleForAlias` method with a [Filament Icon Alias](https://filamentphp.com/docs/4.x/styling/icons#available-icon-aliases). This method works with either a single icon key (string) or multiple icon keys (array).
 
 ```php
+use Filafly\Icons\Iconoir\IconoirIcons;
+use Filafly\Icons\Iconoir\Enums\IconoirStyle;
+use Filament\Tables\View\TablesIconAlias;
+use Filament\Actions\View\ActionsIconAlias;
+
 // Override a single icon key
-IconoirIcons::make()->overrideStyleForAlias('tables::actions.filter', 'solid');
+IconoirIcons::make()->overrideStyleForAlias(TablesIconAlias::ACTIONS_FILTER, IconoirStyle::Solid);
 
 // Override multiple icon keys at once
 IconoirIcons::make()->overrideStyleForAlias([
-    'tables::actions.filter',
-    'actions::delete-action',
-], 'solid');
+    TablesIconAlias::ACTIONS_FILTER,
+    ActionsIconAlias::DELETE_ACTION,
+], IconoirStyle::Solid);
 ```
 
-### Using Icon Names
-Use the `overrideStyleForIcon` method with the actual Iconoir icon name. Like the alias method, this works with either a single icon name or multiple names.
+### Using icon enum cases
+Use the `overrideStyleForIcon` method with Iconoir enum case(s). Like the alias method, this works with either a single case or an array of cases.
 
 ```php
+use Filafly\Icons\Iconoir\IconoirIcons;
+use Filafly\Icons\Iconoir\Enums\Iconoir;
+use Filafly\Icons\Iconoir\Enums\IconoirStyle;
+
 // Override a single icon
-IconoirIcons::make()->overrideStyleForIcon('iconoir-user', 'solid');
+IconoirIcons::make()->overrideStyleForIcon(Iconoir::User, IconoirStyle::Solid);
 
 // Override multiple icons at once
 IconoirIcons::make()->overrideStyleForIcon([
-    'iconoir-search',
-    'iconoir-filter',
-], 'solid');
+    Iconoir::Search,
+    Iconoir::Filter,
+], IconoirStyle::Solid);
+```
+
+## Specifying exact icons to use
+
+You can also specify exactly which icon you would like to use in given situations. This can be done via icon aliases or icon enum cases.
+
+### Override icon aliases
+
+Use `overrideAlias()` to change which icon is used for specific Filament icon aliases:
+
+```php
+use Filafly\Icons\Iconoir\IconoirIcons;
+use Filafly\Icons\Iconoir\Enums\Iconoir;
+use Filament\View\PanelsIconAlias;
+use Filament\Tables\View\TablesIconAlias;
+
+IconoirIcons::make()
+    ->overrideAlias(PanelsIconAlias::SIDEBAR_EXPAND_BUTTON, Iconoir::NavArrowRight)
+    ->overrideAlias(TablesIconAlias::ACTIONS_FILTER, Iconoir::Filter);
+```
+
+Or use `overrideAliases()` to override multiple aliases at once by passing an array:
+
+```php
+use Filafly\Icons\Iconoir\IconoirIcons;
+use Filafly\Icons\Iconoir\Enums\Iconoir;
+use Filament\View\PanelsIconAlias;
+use Filament\Tables\View\TablesIconAlias;
+
+IconoirIcons::make()
+    ->overrideAliases([
+        PanelsIconAlias::SIDEBAR_EXPAND_BUTTON => Iconoir::NavArrowRight,
+        TablesIconAlias::ACTIONS_FILTER => Iconoir::Filter,
+    ]);
+```
+
+### Override individual icons
+
+Use `overrideIcon()` to replace specific Iconoir icons with different ones:
+
+```php
+use Filafly\Icons\Iconoir\IconoirIcons;
+use Filafly\Icons\Iconoir\Enums\Iconoir;
+
+IconoirIcons::make()
+    ->overrideIcon(Iconoir::Search, Iconoir::SearchEngine)
+    ->overrideIcon(Iconoir::Plus, Iconoir::PlusCircle);
+```
+
+Or use `overrideIcons()` to override multiple icons at once by passing an array:
+
+```php
+use Filafly\Icons\Iconoir\IconoirIcons;
+use Filafly\Icons\Iconoir\Enums\Iconoir;
+
+IconoirIcons::make()
+    ->overrideIcons([
+        Iconoir::Search->value => Iconoir::SearchWindow,
+        Iconoir::Plus->value => Iconoir::PlusCircle,
+        Iconoir::Edit->value => Iconoir::EditPencil,
+    ]);
+```
+> PHP arrays do not support enums as keys so `->value` is necessary if you want to reference the enum
+
+These methods are useful for fine-tuning the icon set to better fit your application's needs.
+
+## Icon enum
+All icons are available through an enum providing convenient usage throughout Filament. For more information, check the [Filament docs](https://filamentphp.com/docs/4.x/styling/icons).
+
+```php
+use Filament\Forms\Components\Toggle;
+use Filafly\Icons\Iconoir\Enums\Iconoir;
+
+Toggle::make('is_starred')
+    ->onIcon(Iconoir::Star)
 ```
 
 ## License
