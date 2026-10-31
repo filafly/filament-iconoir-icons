@@ -6,6 +6,8 @@
 
 An Iconoir icon set implementation for [Filament Icons](https://github.com/filafly/filament-icons), allowing for instant replacement of all icons used within the Filament framework.
 
+More about this package on FilaFly: [Iconoir icons for Filament on FilaFly](https://filafly.com/plugins/iconoir-icons).
+
 ## Installation
 
 You can install the package via composer:
